@@ -1,0 +1,5 @@
+.form-wrapper
+  = simple_form_for @post, html: { class: 'form-horizontal12', multipart: true } do |f|
+    = f.input :image, required: true
+    = f.input :caption, required: true
+    = f.button :submit, class: 'btn-success'

@@ -1,0 +1,17 @@
+language: ruby
+rvm:
+- 2.2.2
+deploy:
+  provider: heroku
+  api_key:
+    secure: XCwJPygRFVvKPJ6UNdNYNrKxi1buaHPkIbzwpmRE3jwuKTSmsfuJRRZeXET3hgVIP1CBYAyKYlJh3NmiGBfKGOYH9Rd+z0XqiMUADM9OdqgDrJBpCm02ptODNGb5sgLUsz9kxY6Ns/qhHYM8H9lh8rB3vzOiAABQ4YO0U3db1Wn2Whzx5hkOAJ+4hSrkkpGiSNSMpn1hOu4/ENltcglKTXfFFLdLIeUNgkHVV9988FEggCPUUYHqUpI730qSlGj6zgOcoxKXuoZoul9mtF5rEhI4iWPpyzlrEsqYmzdh4ftyBV6Ec7z0Oe4JpfuoHFo7eD0rLG2aXbYr08xmtksrRoVd5DNMtaKgtx31rRr8tYiKouddOj0UvrsIUINLGjCu4BVDb6SURuIehfxL2qqGPju7DPz/JqVsESVD9U/yeWl6Ikigcx+zBrn+jO0nKBW+AyjstrkviyJxAjkKrhfuC34yYsL75zzOvFH5PUS3bJhARFzOMx8/fp8GzOiddSRLKPV24DS7mSWCz9N4+wAfCT2uSry+iAtapedk0/BtjBu4SFFcSQruD7y2UxWxC4d15UoluA7jugHeB/dCZlZvGxnrjyJNfwm/3+P+h9K5GVHnFdsLEUSDCrfOoK3usK2G1O2zYgvJuWw7t0zpUMHD+ApFW1RAkE6+MCYbTq4LwFU=
+  app: rails-simple-instagram
+  on:
+    repo: max-borisov/rails-simple-instagram
+before_script:
+- cp config/database.yml.travis config/database.yml
+- psql -c 'create database travis_ci_test;' -U postgres
+- bundle exec rake db:migrate
+- bundle exec rake db:seed
+script:
+- bundle exec rspec spec/

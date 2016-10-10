@@ -1,0 +1,14 @@
+AllCops:
+  RunRailsCops: true
+
+Style/Encoding:
+  Enabled: true
+
+Documentation:
+  Enabled: false
+
+Encoding:
+  Enabled: false
+
+LineLength:
+  Max: 100
